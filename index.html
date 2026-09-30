@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trip Reads</title>
+<meta name="description" content="Reading list for Greece &amp; Italy 2026 — what to read on flights, trains and beach days, with a tick-off tracker.">
+<meta name="theme-color" content="#F4F6F6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F181E" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Trip Reads">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#128218;</text></svg>">
+<style>
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{margin:0}
+</style>
+</head>
+<body>
+<style>
+  :root{
+    --bg:#F4F6F6; --card:#FFFFFF; --ink:#1C2B36; --muted:#5B6E7A;
+    --sea:#0F6E8C; --sea-soft:#E3EEF2; --lemon:#B45E12; --lemon-soft:#FBEFDF;
+    --good:#2E7D5B; --good-soft:#E4F1EA; --warn:#A6461C; --warn-soft:#F9E9E1;
+    --line:#D9E2E6; --chip:#EAF0F2; --btn-ink:#FFFFFF;
+    --shadow:0 1px 3px rgba(28,43,54,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F181E; --card:#17242C; --ink:#E6EDF0; --muted:#95A8B2;
+      --sea:#5FB6D6; --sea-soft:#132E3A; --lemon:#E2A557; --lemon-soft:#33261438;
+      --good:#6CC29C; --good-soft:#14302484; --warn:#E59877; --warn-soft:#38201566;
+      --line:#26343D; --chip:#1E2E37; --btn-ink:#0F181E;
+      --shadow:0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F181E; --card:#17242C; --ink:#E6EDF0; --muted:#95A8B2;
+    --sea:#5FB6D6; --sea-soft:#132E3A; --lemon:#E2A557; --lemon-soft:#33261438;
+    --good:#6CC29C; --good-soft:#14302484; --warn:#E59877; --warn-soft:#38201566;
+    --line:#26343D; --chip:#1E2E37; --btn-ink:#0F181E;
+    --shadow:0 1px 3px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:680px; margin:0 auto; padding:26px 14px 60px}
+  a{color:var(--sea); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:2px}
+
+  header.mast{padding:10px 2px 6px}
+  .mast .kicker{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--sea); font-weight:600}
+  .mast h1{margin:.15em 0 .1em; font-size:clamp(28px,9vw,38px); line-height:1.05; text-wrap:balance; font-weight:700}
+  .mast .sub{color:var(--muted); font-size:14.5px; margin:0}
+
+  section{margin:0 0 28px; scroll-margin-top:20px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+  h2.sect{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--sea); margin:30px 0 10px; font-weight:700}
+  .lede{color:var(--muted); font-size:14.5px; margin:2px 0 12px}
+  .big{font-size:19px; font-weight:700}
+
+  /* progress */
+  #progress .pbhead{display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:9px}
+  .pbar{height:10px; border-radius:6px; background:var(--chip); overflow:hidden}
+  .pbar-fill{height:100%; width:0%; background:var(--good); border-radius:6px; transition:width .25s ease}
+  @media (prefers-reduced-motion: reduce){ .pbar-fill{transition:none} }
+  .resetbtn{display:block; width:100%; margin-top:10px; padding:10px; border:1.5px solid var(--line); border-radius:10px;
+    background:var(--chip); color:var(--ink); font-weight:700; font-size:14px; cursor:pointer}
+
+  /* book cards */
+  .book{padding:14px 14px 6px}
+  .bkrow{display:flex; align-items:flex-start; gap:12px; cursor:pointer}
+  .bkrow input[type="checkbox"]{flex:none; width:23px; height:23px; margin-top:2px; accent-color:var(--good); cursor:pointer}
+  .bktitle{flex:1; min-width:0}
+  .bktitle .order{color:var(--muted); font-weight:600; font-size:12.5px}
+  .bktitle b{display:block; font-size:16.5px; line-height:1.3}
+  .bktitle .by{color:var(--muted); font-size:13px; margin-top:1px}
+  .bktitle .pages{color:var(--muted); font-size:12.5px; margin-top:3px}
+  .book.done .bktitle b{opacity:.5; text-decoration:line-through; text-decoration-color:var(--muted)}
+  .book.done{opacity:.75}
+
+  .tag{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; padding:3px 10px; border-radius:999px; margin-top:6px}
+  .tag-flight{background:var(--sea-soft); color:var(--sea)}
+  .tag-train{background:var(--lemon-soft); color:var(--lemon)}
+  .tag-beach{background:var(--good-soft); color:var(--good)}
+
+  details{margin-top:10px}
+  details summary{cursor:pointer; padding:9px 0 9px; font-weight:700; font-size:13.5px; color:var(--sea); list-style:none; display:flex; align-items:center; gap:6px; border-top:1px solid var(--line)}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+"; font-size:17px; font-weight:600; margin-left:auto}
+  details[open] summary::after{content:"–"}
+  details .inner{padding:0 0 10px; font-size:14.5px; line-height:1.6}
+  details .inner p{margin:0 0 10px}
+  details .inner p:last-child{margin-bottom:0}
+  details .inner b{color:var(--ink)}
+
+  .foot{color:var(--muted); font-size:12.5px; margin-top:30px; border-top:1px solid var(--line); padding-top:14px}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="kicker">Greece &amp; Italy · 2026</div>
+    <h1>Trip Reads</h1>
+    <p class="sub">What to read on flights, trains and beach days — tap a book for the story and alternates.</p>
+  </header>
+
+  <div class="card" id="progress">
+    <div class="pbhead">
+      <p class="big" style="margin:0">Reading progress</p>
+      <p class="lede" id="pbartext" style="margin:0">0 of 10 read</p>
+    </div>
+    <div class="pbar"><div class="pbar-fill" id="pbarfill"></div></div>
+    <button class="resetbtn" id="resetchecklist" type="button">Reset all</button>
+  </div>
+
+  <!-- ============ FLIGHTS ============ -->
+  <section id="flights">
+    <h2 class="sect">✈️ Long flights</h2>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="morning-star">
+        <div class="bktitle">
+          <span class="order">Flight out</span>
+          <b>Morning Star</b>
+          <div class="by">Pierce Brown · Red Rising, Book 3</div>
+          <div class="pages">518 pages</div>
+          <span class="tag tag-flight">Flight</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>The climax of the original Red Rising trilogy — huge scale, relentless pacing, and the payoff for everything Darrow's been building toward. Long and propulsive enough to carry a full long-haul flight without running dry.</p>
+          <p><b>Want something different?</b> If you finish early, <i>Iron Gold</i> (Red Rising #4) keeps the story going. For the same addictive "getting more powerful every chapter" feeling in much shorter books, try the <i>Cradle</i> series by Will Wight.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="song-of-achilles">
+        <div class="bktitle">
+          <span class="order">Flight home · part 1</span>
+          <b>The Song of Achilles</b>
+          <div class="by">Madeline Miller</div>
+          <div class="pages">416 pages</div>
+          <span class="tag tag-flight">Flight</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>Achilles and Patroclus, retold — devastating, beautifully written, one of the most talked-about tragic romances in modern fiction. Worth starting fresh from page one even if you've read part of it before, since the ending only lands if the early relationship-building is fresh in your head.</p>
+          <p>Read this half of the flight home first — it's the heavier of the pair, so best to get the gut-punch done before <i>Circe</i>.</p>
+          <p><b>Want something different?</b> <i>Ithaca</i> by Claire North or <i>A Thousand Ships</i> by Natalie Haynes are both strong Greek mythology retellings in a similar vein.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="circe">
+        <div class="bktitle">
+          <span class="order">Flight home · part 2</span>
+          <b>Circe</b>
+          <div class="by">Madeline Miller</div>
+          <div class="pages">393 pages</div>
+          <span class="tag tag-flight">Flight</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>Greek mythology retold from the witch Circe's point of view — the Odyssey, Scylla, Icarus, all woven through her life. Ties in nicely with having just been in Greece, and Achilles appears later in the book with far more weight once you've read his story first.</p>
+          <p>Ends more hopeful and empowering than <i>Song of Achilles</i> — a good note to land the whole trip on.</p>
+          <p><b>Want something different?</b> Read as a pair with Song of Achilles above; on its own, it's a strong standalone either way.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ TRAINS & BUSES ============ -->
+  <section id="trains">
+    <h2 class="sect">🚆 Trains &amp; buses</h2>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="dark-matter">
+        <div class="bktitle">
+          <b>Dark Matter</b>
+          <div class="by">Blake Crouch</div>
+          <div class="pages">368 pages</div>
+          <span class="tag tag-train">Train / bus</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>An ordinary physics professor is abducted into a version of his life that isn't quite his own, and has to fight his way back to the family he knows. Thriller pacing with short, punchy chapters — built to survive being picked up and put down at every stop.</p>
+          <p><b>Want something different?</b> <i>Recursion</i>, also by Crouch, is a loosely connected follow-up with the same mind-bending, unputdownable energy.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="metamorphosis">
+        <div class="bktitle">
+          <b>The Metamorphosis</b>
+          <div class="by">Franz Kafka</div>
+          <div class="pages">~85 pages</div>
+          <span class="tag tag-train">Train / bus</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>Gregor Samsa wakes up one morning transformed into a giant insect. Short, strange and dense — reads slower than the page count suggests, so best tackled in one sitting on a single leg rather than in fragments.</p>
+          <p><b>Want something different?</b> <i>The Stranger</i> (Camus) or <i>The Strange Case of Dr Jekyll and Mr Hyde</i> (Stevenson) are similarly short, strange classics.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="of-mice-and-men">
+        <div class="bktitle">
+          <b>Of Mice and Men</b>
+          <div class="by">John Steinbeck</div>
+          <div class="pages">112 pages</div>
+          <span class="tag tag-train">Train / bus</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>Two migrant ranch workers dream of saving enough to buy a small farm of their own during the Great Depression. Plain and simple on the surface, but the ending is genuinely devastating — best read solo on a quiet leg, not right before you need to be sociable.</p>
+          <p><b>Want something different?</b> For something short but with a gentler (if still moving) touch, try <i>A Man Called Ove</i> by Fredrik Backman.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="fahrenheit-451">
+        <div class="bktitle">
+          <b>Fahrenheit 451</b>
+          <div class="by">Ray Bradbury</div>
+          <div class="pages">~195 pages</div>
+          <span class="tag tag-train">Train / bus</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>A fireman whose job is burning books starts questioning why. Short, but the prose is dense and almost poetic, so it reads slower than the page count implies — better suited to a longer train leg than a quick hop.</p>
+          <p><b>Want something different?</b> <i>Animal Farm</i> (Orwell) or <i>Brave New World</i> (Huxley) are other short dystopian classics in the same spirit.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ BEACH DAYS ============ -->
+  <section id="beach">
+    <h2 class="sect">🏖️ Beach days</h2>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="time-war">
+        <div class="bktitle">
+          <b>This Is How You Lose the Time War</b>
+          <div class="by">Amal El-Mohtar &amp; Max Gladstone</div>
+          <div class="pages">~220 pages</div>
+          <span class="tag tag-beach">Beach day</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>Two rival time-travelling agents on opposing sides of a war fall for each other through letters left hidden across timelines. Lush, poetic, epistolary prose — meant to be read slowly and savoured, not rushed between stops.</p>
+          <p><b>Want something different?</b> <i>Piranesi</i> by Susanna Clarke has a similarly strange, atmospheric, one-sitting quality.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="long-way">
+        <div class="bktitle">
+          <b>The Long Way to a Small, Angry Planet</b>
+          <div class="by">Becky Chambers · Wayfarers, Book 1</div>
+          <div class="pages">432 pages</div>
+          <span class="tag tag-beach">Beach day</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>A found-family crew punches wormholes across the galaxy for a living. Episodic and character-driven rather than plot-driven — low stakes, warm, and easy to sink into for a long relaxed sit without worrying about losing the thread.</p>
+          <p><b>Want something different?</b> If you want more of the universe afterwards, <i>A Closed and Common Orbit</i> follows different characters — no need to read the series in order.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card book">
+      <label class="bkrow">
+        <input type="checkbox" data-bk="this-kingdom">
+        <div class="bktitle">
+          <b>This Kingdom Will Not Kill Me</b>
+          <div class="by">Ilona Andrews · Maggie the Undying, Book 1</div>
+          <div class="pages">480 pages</div>
+          <span class="tag tag-beach">Beach day</span>
+        </div>
+      </label>
+      <details>
+        <summary>Insight &amp; alternates</summary>
+        <div class="inner">
+          <p>Maggie wakes up inside the dark fantasy series she's been obsessively reading — and discovers that when she dies, she doesn't stay dead. Reviews flag a slow, info-heavy first third, so give it a long uninterrupted stretch to reach the payoff everyone says the second half delivers. Ends on a cliffhanger — book one of a series.</p>
+          <p><b>Want something different?</b> If the slow burn isn't for you, <i>Mistborn</i> by Brandon Sanderson scratches a similar heist-fantasy itch with faster pacing.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <p class="foot">Tap a checkbox to mark a book read — progress is saved on this device. Tap a book to expand its insight and alternate picks.</p>
+
+</div>
+
+<script>
+(function(){
+  var boxes=document.querySelectorAll('[data-bk]');
+  var fill=document.getElementById('pbarfill'), text=document.getElementById('pbartext');
+  function key(b){ return 'tripreads_'+b.getAttribute('data-bk'); }
+  function refresh(){
+    var done=0;
+    for(var i=0;i<boxes.length;i++){
+      var b=boxes[i], card=b.closest('.book');
+      if(card) card.classList.toggle('done', b.checked);
+      if(b.checked) done++;
+    }
+    var total=boxes.length;
+    var pct = total ? Math.round(done/total*100) : 0;
+    if(fill) fill.style.width = pct+'%';
+    if(text) text.textContent = done+' of '+total+' read';
+  }
+  for(var i=0;i<boxes.length;i++){
+    (function(b){
+      try{ if(localStorage.getItem(key(b))==='1') b.checked=true; }catch(e){}
+      b.addEventListener('change', function(){
+        try{ localStorage.setItem(key(b), b.checked?'1':'0'); }catch(e){}
+        refresh();
+      });
+      b.addEventListener('click', function(ev){ ev.stopPropagation(); });
+    })(boxes[i]);
+  }
+  var reset=document.getElementById('resetchecklist');
+  if(reset) reset.addEventListener('click', function(){
+    if(!window.confirm('Uncheck every book?')) return;
+    for(var i=0;i<boxes.length;i++){
+      boxes[i].checked=false;
+      try{ localStorage.removeItem(key(boxes[i])); }catch(e){}
+    }
+    refresh();
+  });
+  refresh();
+})();
+</script>
+
+</body>
+</html>
